@@ -3,6 +3,8 @@ Week 6 GitHub Actions assignment
 
 ## Update for CI test
 
+![CI](https://github.com/JuanPinto26/Github-actions/actions/workflows/maven.yml/badge.svg)
+
 ## Overview
 This project demonstrates a CI pipeline using GitHub Actions for a Maven-based Java project.
 
