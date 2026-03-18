@@ -11,20 +11,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up Java 17 with Maven cache
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
           distribution: 'temurin'
+          java-version: '17'
+          cache: maven
 
       - name: Build project
-        run: echo "Building project..."
+        run: mvn clean compile
 
       - name: Run tests
-        run: echo "Tests passed!"
+        run: mvn test
         env:
           TEST_API_KEY: ${{ secrets.TEST_API_KEY }}
 
@@ -32,5 +33,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-reports-${{ github.run_number }}
-          path: .
+          name: surefire-reports-${{ github.run_number }}
+          path: target/surefire-reports/
+          retention-days: 30
